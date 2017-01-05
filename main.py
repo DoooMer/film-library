@@ -1,7 +1,6 @@
 import sys
+from Filmlibrary.Filmlibrary import Filmlibrary
 
-from Filmlibrary.Application import Application
-
-app = Application(sys.argv)
-
-sys.exit(app.exec())
+if __name__ == '__main__':
+    app = Filmlibrary(sys.argv)
+    sys.exit(app.run())
