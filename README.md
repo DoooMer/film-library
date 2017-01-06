@@ -12,3 +12,8 @@ virtual environment
 python3.5 -m venv filmlibraryenv
 . filmlibraryenv/bin/activate
 ```
+
+convert ui to python
+```
+pyuic5 input.ui -o output.py
+```

@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QDesktopWidget
 from PyQt5.QtWidgets import QWidget
 
-from Filmlibrary.views.Main import Main
+from Filmlibrary.ui.Main import Main
 
 
 class Filmlibrary:
