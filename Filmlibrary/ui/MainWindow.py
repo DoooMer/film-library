@@ -8,7 +8,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -54,6 +53,10 @@ class Ui_MainWindow(object):
         self.actionUpdate = QtWidgets.QAction(MainWindow)
         self.actionUpdate.setShortcutContext(QtCore.Qt.ApplicationShortcut)
         self.actionUpdate.setObjectName("actionUpdate")
+        self.action = QtWidgets.QAction(MainWindow)
+        self.action.setObjectName("action")
+        self.menu.addAction(self.action)
+        self.menu.addSeparator()
         self.menu.addAction(self.actionExit)
         self.menu_2.addAction(self.actionUpdate)
         self.menu_2.addSeparator()
@@ -85,3 +88,5 @@ class Ui_MainWindow(object):
         self.actionSearch.setStatusTip(_translate("MainWindow", "Найти фильм"))
         self.actionUpdate.setText(_translate("MainWindow", "Обновить список"))
         self.actionUpdate.setStatusTip(_translate("MainWindow", "Обновить список фильмов"))
+        self.action.setText(_translate("MainWindow", "Открыть..."))
+
