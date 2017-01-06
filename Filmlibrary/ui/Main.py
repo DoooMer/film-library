@@ -10,11 +10,12 @@ class Main(QMainWindow, Ui_MainWindow):
     height = 400
     title = "Film library 4.1"
 
-    def __init__(self):
-        super().__init__()
-        self.initUI()
+    def __init__(self, parent=None):
+        super(Main, self).__init__(parent)
+        self.setupUi(self)
 
-    def initUI(self):
+    def setupUi(self, MainWindow):
+        super().setupUi(MainWindow)
         self.resize(self.width, self.height)
         self.center()
         self.setWindowTitle(self.title)
