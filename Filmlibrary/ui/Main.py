@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import QDesktopWidget
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QWidget
+
+from Filmlibrary.ui.MainWindow import Ui_MainWindow
 
 
-class Main(QWidget):
+class Main(QMainWindow, Ui_MainWindow):
     width = 600
     height = 400
     title = "Film library 4.1"
