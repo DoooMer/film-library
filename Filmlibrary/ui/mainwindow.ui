@@ -68,6 +68,9 @@
    <property name="statusTip">
     <string>Закрыть приложение</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
    <property name="shortcutContext">
     <enum>Qt::ApplicationShortcut</enum>
    </property>

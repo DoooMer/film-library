@@ -81,6 +81,7 @@ class Ui_MainWindow(object):
         self.menu_2.setTitle(_translate("MainWindow", "Фильм"))
         self.actionExit.setText(_translate("MainWindow", "Выход"))
         self.actionExit.setStatusTip(_translate("MainWindow", "Закрыть приложение"))
+        self.actionExit.setShortcut(_translate("MainWindow", "Ctrl+Q"))
         self.actionCreate.setText(_translate("MainWindow", "Добавить"))
         self.actionCreate.setStatusTip(_translate("MainWindow", "Добавить фильм"))
         self.actionEdit.setText(_translate("MainWindow", "Редактировать"))
