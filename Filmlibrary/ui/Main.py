@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDesktopWidget
 from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QStackedWidget
@@ -29,6 +30,8 @@ class Main(QMainWindow, Ui_MainWindow):
         self.centralWidget = QStackedWidget()
         MainWindow.setCentralWidget(self.centralWidget)
         tableWidget = TableWidget()
+        label = QLabel("Open or create database")
+        self.centralWidget.addWidget(label)
         self.centralWidget.addWidget(tableWidget)
         # self.centralWidget.setCurrentWidget(tableWidget)
         self.show()
