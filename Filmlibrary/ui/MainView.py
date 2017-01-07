@@ -12,7 +12,7 @@ class Ui_MainView(object):
     def setupUi(self, MainView):
         MainView.setObjectName("MainView")
         MainView.resize(800, 500)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainView.sizePolicy().hasHeightForWidth())
