@@ -1,10 +1,9 @@
 from peewee import *
 
+from Filmlibrary.models.BaseModel import BaseModel
 
-db = SqliteDatabase('../../Library.db')
 
-
-class Film(Model):
+class Film(BaseModel):
     id = PrimaryKeyField()
     disk_number = IntegerField()
     title = TextField()
@@ -12,6 +11,3 @@ class Film(Model):
     genre = TextField()
     director = TextField()
     role = TextField()
-
-    class Meta:
-        database = db

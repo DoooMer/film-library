@@ -1,27 +1,25 @@
 from PyQt5.QtWidgets import QApplication
 from peewee import SqliteDatabase
-
+from Filmlibrary import config
 from Filmlibrary.ui.Main import Main
 
 
 class Filmlibrary:
+    dbFile = "default.db"
+    db = config.db
+
     def __init__(self, argv):
         self.qApp = QApplication(argv)
         super().__init__()
 
     def run(self):
         main = Main(app=self)
-        self.dbFile = "default.db"
         return self.qApp.exec_()
 
-    def connect(self, file=None):
-        if file is not None:
-            self.dbFile = file
-
+    def connect(self):
         self.close()
-        self.db = SqliteDatabase(self.dbFile)
-        self.db.connect()
+        config.db.init(self.dbFile)
 
     def close(self):
-        if hasattr(self, 'db') and isinstance(self.db, SqliteDatabase):
+        if isinstance(self.db, SqliteDatabase) and not self.db.is_closed():
             self.db.close()
