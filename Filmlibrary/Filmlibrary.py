@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QApplication
 from peewee import SqliteDatabase
+
 from Filmlibrary import config
+from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.Main import Main
 
 
@@ -19,6 +21,7 @@ class Filmlibrary:
     def connect(self):
         self.close()
         config.db.init(self.dbFile)
+        config.db.create_tables([Film], True)
 
     def close(self):
         if isinstance(self.db, SqliteDatabase) and not self.db.is_closed():

@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QMessageBox
 
-from Filmlibrary import config
-from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.MainWindow import Ui_MainWindow
 
 
@@ -53,4 +51,3 @@ class Main(QMainWindow, Ui_MainWindow):
         dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', '*.db')
         self.app.dbFile = dbfile[0]
         self.app.connect()
-        config.db.create_tables([Film], True)
