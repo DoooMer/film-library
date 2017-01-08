@@ -13,4 +13,5 @@ class Film(BaseModel):
     role = TextField()
 
     class Meta:
+        # TODO add import from old version
         db_table = "Films"
