@@ -11,3 +11,6 @@ class Film(BaseModel):
     genre = TextField()
     director = TextField()
     role = TextField()
+
+    class Meta:
+        db_table = "Films"

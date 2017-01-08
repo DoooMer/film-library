@@ -24,7 +24,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.setWindowTitle(self.title)
         self.openWidget = OpenWidget(app=self.app)
         self.tableWidget = TableWidget(app=self.app)
-        self.setupCentralWidget()
+        self.setupCentralWidgets()
         self.show()
 
     def center(self):
@@ -33,7 +33,7 @@ class Main(QMainWindow, Ui_MainWindow):
         frame_geometry.moveCenter(center)
         self.move(frame_geometry.topLeft())
 
-    def setupCentralWidget(self):
+    def setupCentralWidgets(self):
         self.centralWidget = QStackedWidget()
         self.setCentralWidget(self.centralWidget)
 
@@ -43,7 +43,6 @@ class Main(QMainWindow, Ui_MainWindow):
 
         self.centralWidget.addWidget(self.tableWidget)
 
-        # self.centralWidget.setCurrentWidget(tableWidget)
         self.chooseCentralWidget()
 
     def chooseCentralWidget(self):
