@@ -42,7 +42,13 @@ class Main(QMainWindow, Ui_MainWindow):
         self.openWidget.buttonOpen.clicked.connect(self.openFileDialog)
 
         self.centralWidget.addWidget(self.tableWidget)
+
         # self.centralWidget.setCurrentWidget(tableWidget)
+        self.chooseCentralWidget()
+
+    def chooseCentralWidget(self):
+        if self.app.isOpen:
+            self.tableWidget.display()
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?", QMessageBox.Yes | QMessageBox.No,
@@ -58,8 +64,10 @@ class Main(QMainWindow, Ui_MainWindow):
         dbfile = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
         self.app.dbFile = dbfile[0]
         self.app.connect()
+        self.chooseCentralWidget()
 
     def createFileDialog(self):
         dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', 'DB files (*.db)')
         self.app.dbFile = dbfile[0]
         self.app.connect()
+        self.chooseCentralWidget()
