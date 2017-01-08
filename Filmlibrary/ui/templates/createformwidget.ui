@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CreateForm</class>
+ <widget class="QWidget" name="CreateForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>591</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::ExpandingFieldsGrow</enum>
+    </property>
+    <property name="rowWrapPolicy">
+     <enum>QFormLayout::WrapLongRows</enum>
+    </property>
+    <property name="labelAlignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="horizontalSpacing">
+     <number>10</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>15</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="diskLabel">
+      <property name="text">
+       <string>Номер диска</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QSpinBox" name="diskInput">
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>999</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="titleLabel">
+      <property name="text">
+       <string>Название</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="titleInput"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="yearLabel">
+      <property name="text">
+       <string>Год выхода</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="yearInput">
+      <property name="inputMask">
+       <string>9999</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="cursorPosition">
+       <number>1</number>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="genreLabel">
+      <property name="text">
+       <string>Жанр</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="genreInput"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="directorLabel">
+      <property name="text">
+       <string>Режиссер</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="directorInput"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="roleLabel">
+      <property name="text">
+       <string>В ролях</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="roleInput"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>571</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="leftMargin">
+     <number>102</number>
+    </property>
+    <property name="rightMargin">
+     <number>261</number>
+    </property>
+    <item>
+     <widget class="QPushButton" name="buttonSave">
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="buttonCancel">
+      <property name="text">
+       <string>Отмена</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

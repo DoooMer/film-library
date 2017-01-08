@@ -22,6 +22,8 @@ class Main(QMainWindow, Ui_MainWindow):
         self.resize(self.width, self.height)
         self.center()
         self.setWindowTitle(self.title)
+        self.openWidget = OpenWidget(app=self.app)
+        self.tableWidget = TableWidget(app=self.app)
         self.setupCentralWidget()
         self.show()
 
@@ -35,13 +37,11 @@ class Main(QMainWindow, Ui_MainWindow):
         self.centralWidget = QStackedWidget()
         self.setCentralWidget(self.centralWidget)
 
-        openWidget = OpenWidget(app=self.app)
-        self.centralWidget.addWidget(openWidget)
-        openWidget.buttonCreate.clicked.connect(self.createFileDialog)
-        openWidget.buttonOpen.clicked.connect(self.openFileDialog)
+        self.centralWidget.addWidget(self.openWidget)
+        self.openWidget.buttonCreate.clicked.connect(self.createFileDialog)
+        self.openWidget.buttonOpen.clicked.connect(self.openFileDialog)
 
-        tableWidget = TableWidget(app=self.app)
-        self.centralWidget.addWidget(tableWidget)
+        self.centralWidget.addWidget(self.tableWidget)
         # self.centralWidget.setCurrentWidget(tableWidget)
 
     def closeEvent(self, event):
@@ -58,7 +58,6 @@ class Main(QMainWindow, Ui_MainWindow):
         dbfile = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
         self.app.dbFile = dbfile[0]
         self.app.connect()
-        print(self.app)
 
     def createFileDialog(self):
         dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', 'DB files (*.db)')
