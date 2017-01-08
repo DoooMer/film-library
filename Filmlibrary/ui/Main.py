@@ -1,13 +1,7 @@
-from PyQt5.QtWidgets import QDesktopWidget
-from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtWidgets import QMainWindow
-from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtWidgets import QStackedWidget
+from PyQt5.QtWidgets import QDesktopWidget, QFileDialog, QMainWindow, QMessageBox, QStackedWidget
 
-from Filmlibrary.ui.MainWindow import Ui_MainWindow
-from Filmlibrary.ui.OpenWidget import OpenWidget
-from Filmlibrary.ui.TableWidget import TableWidget
+from Filmlibrary.ui.templates import Ui_MainWindow
+from Filmlibrary.ui.widgets import OpenWidget, TableWidget
 
 
 class Main(QMainWindow, Ui_MainWindow):
@@ -17,8 +11,8 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def __init__(self, parent=None, app=None):
         super(Main, self).__init__(parent)
-        self.setupUi(self)
         self.app = app
+        self.setupUi(self)
         self.actionNew.triggered.connect(self.createFileDialog)
         self.actionOpen.triggered.connect(self.openFileDialog)
         self.actionExit.triggered.connect(self.close)
@@ -41,12 +35,12 @@ class Main(QMainWindow, Ui_MainWindow):
         self.centralWidget = QStackedWidget()
         self.setCentralWidget(self.centralWidget)
 
-        openWidget = OpenWidget()
+        openWidget = OpenWidget(app=self.app)
         self.centralWidget.addWidget(openWidget)
         openWidget.buttonCreate.clicked.connect(self.createFileDialog)
         openWidget.buttonOpen.clicked.connect(self.openFileDialog)
 
-        tableWidget = TableWidget()
+        tableWidget = TableWidget(app=self.app)
         self.centralWidget.addWidget(tableWidget)
         # self.centralWidget.setCurrentWidget(tableWidget)
 
@@ -64,8 +58,9 @@ class Main(QMainWindow, Ui_MainWindow):
         dbfile = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
         self.app.dbFile = dbfile[0]
         self.app.connect()
+        print(self.app)
 
     def createFileDialog(self):
-        dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', '*.db')
+        dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', 'DB files (*.db)')
         self.app.dbFile = dbfile[0]
         self.app.connect()

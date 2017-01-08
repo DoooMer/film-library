@@ -9,6 +9,7 @@ from Filmlibrary.ui.Main import Main
 class Filmlibrary:
     dbFile = "default.db"
     db = config.db
+    isOpen = False
 
     def __init__(self, argv):
         self.qApp = QApplication(argv)
@@ -22,7 +23,9 @@ class Filmlibrary:
         self.close()
         config.db.init(self.dbFile)
         config.db.create_tables([Film], True)
+        self.isOpen = True
 
     def close(self):
         if isinstance(self.db, SqliteDatabase) and not self.db.is_closed():
             self.db.close()
+            self.isOpen = False
