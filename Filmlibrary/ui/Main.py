@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QStackedWidget
 
 from Filmlibrary.ui.MainWindow import Ui_MainWindow
+from Filmlibrary.ui.OpenWidget import OpenWidget
 from Filmlibrary.ui.TableWidget import TableWidget
 
 
@@ -27,13 +28,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.resize(self.width, self.height)
         self.center()
         self.setWindowTitle(self.title)
-        self.centralWidget = QStackedWidget()
-        MainWindow.setCentralWidget(self.centralWidget)
-        tableWidget = TableWidget()
-        label = QLabel("Open or create database")
-        self.centralWidget.addWidget(label)
-        self.centralWidget.addWidget(tableWidget)
-        # self.centralWidget.setCurrentWidget(tableWidget)
+        self.setupCentralWidget()
         self.show()
 
     def center(self):
@@ -41,6 +36,19 @@ class Main(QMainWindow, Ui_MainWindow):
         center = QDesktopWidget().availableGeometry().center()
         frame_geometry.moveCenter(center)
         self.move(frame_geometry.topLeft())
+
+    def setupCentralWidget(self):
+        self.centralWidget = QStackedWidget()
+        self.setCentralWidget(self.centralWidget)
+
+        openWidget = OpenWidget()
+        self.centralWidget.addWidget(openWidget)
+        openWidget.buttonCreate.clicked.connect(self.createFileDialog)
+        openWidget.buttonOpen.clicked.connect(self.openFileDialog)
+
+        tableWidget = TableWidget()
+        self.centralWidget.addWidget(tableWidget)
+        # self.centralWidget.setCurrentWidget(tableWidget)
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?", QMessageBox.Yes | QMessageBox.No,
