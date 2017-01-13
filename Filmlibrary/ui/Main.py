@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QDesktopWidget, QFileDialog, QMainWindow, QMessageBox, QStackedWidget
 
+from Filmlibrary import config
 from Filmlibrary.ui.templates import Ui_MainWindow
 from Filmlibrary.ui.widgets import OpenWidget, TableWidget
 
@@ -66,7 +67,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.chooseCentralWidget()
 
     def createFileDialog(self):
-        dbfile = QFileDialog.getSaveFileName(self, 'Create file', 'default.db', 'DB files (*.db)')
+        dbfile = QFileDialog.getSaveFileName(self, 'Create file', config.defaultDbFileName, 'DB files (*.db)')
         self.app.dbFile = dbfile[0]
         self.app.connect()
         self.chooseCentralWidget()
