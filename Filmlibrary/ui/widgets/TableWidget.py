@@ -19,19 +19,23 @@ class TableWidget(QWidget, Ui_MainView):
         self.buttonDelete.hide()
         self.list.hideColumn(0)
         self.list.setHorizontalHeaderLabels(self.tableHeaders)
-        self.list.cellClicked.connect(self.toggleEditButtons)
+        self.list.cellClicked.connect(self.toggle_edit_buttons)
+
+    def _reset_selection(self):
+        self.selectedRow = None
+        self.selectedFilmId = None
+        self.list.clearSelection()
 
     def display(self):
         self.buttonEdit.hide()
         self.buttonDelete.hide()
-        self.selectedRow = None
-        self.selectedFilmId = None
-        self.list.clearSelection()
-        self.loadValues()
+        self._reset_selection()
+        self.load_values()
         assert isinstance(self.parent(), QStackedWidget)
         self.parent().setCurrentWidget(self)
 
-    def loadValues(self):
+    def load_values(self):
+        self._reset_selection()
         iterator = 0
         films = Film.select()
         self.list.setRowCount(len(films))
@@ -46,7 +50,7 @@ class TableWidget(QWidget, Ui_MainView):
             self.list.setItem(iterator, 6, QTableWidgetItem(film.role))
             iterator += 1
 
-    def toggleEditButtons(self, row):
+    def toggle_edit_buttons(self, row):
         self.selectedRow = row
 
         self.buttonEdit.show()

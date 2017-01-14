@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QDesktopWidget, QFileDialog, QMainWindow, QMessageBox, QStackedWidget
 
 from Filmlibrary import config
+from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_MainWindow
 from Filmlibrary.ui.widgets import OpenWidget, TableWidget, FormWidget
 
@@ -46,6 +47,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.centralWidget.addWidget(self.tableWidget)
         self.tableWidget.buttonAdd.clicked.connect(self.showCreate)
         self.tableWidget.buttonEdit.clicked.connect(self.showEdit)
+        self.tableWidget.buttonDelete.clicked.connect(self.deleteFilm)
 
         self.centralWidget.addWidget(self.formWidget)
 
@@ -83,3 +85,20 @@ class Main(QMainWindow, Ui_MainWindow):
     def showEdit(self):
         self.formWidget.load(self.tableWidget.selectedFilmId)
         self.formWidget.display()
+
+    def deleteFilm(self):
+        confirm = QMessageBox.question(
+            self,
+            "Delete film",
+            "Are you sure to delete?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No
+        )
+
+        if confirm == QMessageBox.Yes:
+            if self.tableWidget.selectedFilmId is not None:
+                film = Film.get(Film.id == self.tableWidget.selectedFilmId)
+                film.delete_instance()
+                self.tableWidget.load_values()
+        else:
+            pass
