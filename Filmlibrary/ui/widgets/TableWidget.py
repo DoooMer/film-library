@@ -30,6 +30,7 @@ class TableWidget(QWidget, Ui_MainView):
         self.buttonEdit.hide()
         self.buttonDelete.hide()
         self.selectedRow = None
+        self.list.clearSelection()
         self.loadValues()
         assert isinstance(self.parent(), QStackedWidget)
         self.parent().setCurrentWidget(self)
