@@ -8,7 +8,7 @@ from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_FilmForm
 
 
-class CreateWidget(QWidget, Ui_FilmForm):
+class FormWidget(QWidget, Ui_FilmForm):
     def __init__(self, app=None):
         super().__init__()
         self.setupUi(self)

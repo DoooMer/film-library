@@ -2,8 +2,7 @@ from PyQt5.QtWidgets import QDesktopWidget, QFileDialog, QMainWindow, QMessageBo
 
 from Filmlibrary import config
 from Filmlibrary.ui.templates import Ui_MainWindow
-from Filmlibrary.ui.widgets import CreateWidget
-from Filmlibrary.ui.widgets import OpenWidget, TableWidget
+from Filmlibrary.ui.widgets import OpenWidget, TableWidget, FormWidget
 
 
 class Main(QMainWindow, Ui_MainWindow):
@@ -26,7 +25,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.setWindowTitle(self.title)
         self.openWidget = OpenWidget(app=self.app)
         self.tableWidget = TableWidget(app=self.app)
-        self.createWidget = CreateWidget(app=self.app)
+        self.formWidget = FormWidget(app=self.app)
         self.setupCentralWidgets()
         self.show()
 
@@ -47,7 +46,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.centralWidget.addWidget(self.tableWidget)
         self.tableWidget.buttonAdd.clicked.connect(self.showCreate)
 
-        self.centralWidget.addWidget(self.createWidget)
+        self.centralWidget.addWidget(self.formWidget)
 
         self.chooseCentralWidget()
 
@@ -78,4 +77,4 @@ class Main(QMainWindow, Ui_MainWindow):
         self.chooseCentralWidget()
 
     def showCreate(self):
-        self.createWidget.display()
+        self.formWidget.display()
