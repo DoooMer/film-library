@@ -9,6 +9,8 @@ from Filmlibrary.ui.templates import Ui_FilmForm
 
 
 class FormWidget(QWidget, Ui_FilmForm):
+    film = None
+
     def __init__(self, app=None):
         super().__init__()
         self.setupUi(self)
@@ -41,17 +43,25 @@ class FormWidget(QWidget, Ui_FilmForm):
         self.parent().parent().tableWidget.display()
 
     def save(self):
-        film = Film(
-            disk_number=self.diskInput.value(),
-            title=self.titleInput.text(),
-            year=self.yearInput.text(),
-            genre=self.genreInput.text(),
-            director=self.directorInput.text(),
-            role=self.roleInput.text()
-        )
+        if self.film is not None:
+            self.film.disk_number = self.diskInput.value()
+            self.film.title = self.titleInput.text()
+            self.film.year = self.yearInput.text()
+            self.film.genre = self.genreInput.text()
+            self.film.director = self.directorInput.text()
+            self.film.role = self.roleInput.text()
+        else:
+            self.film = Film(
+                disk_number=self.diskInput.value(),
+                title=self.titleInput.text(),
+                year=self.yearInput.text(),
+                genre=self.genreInput.text(),
+                director=self.directorInput.text(),
+                role=self.roleInput.text()
+            )
 
         try:
-            film.save()
+            self.film.save()
         except ValueError:
             message = QMessageBox()
             message.setIcon(QMessageBox.Warning)
@@ -62,3 +72,13 @@ class FormWidget(QWidget, Ui_FilmForm):
         else:
             self.clearInputs()
             self.goBack()
+
+    def load(self, film_id):
+        self.film = Film.get(Film.id == film_id)
+
+        self.diskInput.setValue(self.film.disk_number)
+        self.titleInput.setText(self.film.title)
+        self.yearInput.setText(str(self.film.year))
+        self.genreInput.setText(self.film.genre)
+        self.directorInput.setText(self.film.director)
+        self.roleInput.setText(self.film.role)

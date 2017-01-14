@@ -45,6 +45,7 @@ class Main(QMainWindow, Ui_MainWindow):
 
         self.centralWidget.addWidget(self.tableWidget)
         self.tableWidget.buttonAdd.clicked.connect(self.showCreate)
+        self.tableWidget.buttonEdit.clicked.connect(self.showEdit)
 
         self.centralWidget.addWidget(self.formWidget)
 
@@ -77,4 +78,8 @@ class Main(QMainWindow, Ui_MainWindow):
         self.chooseCentralWidget()
 
     def showCreate(self):
+        self.formWidget.display()
+
+    def showEdit(self):
+        self.formWidget.load(self.tableWidget.selectedFilmId)
         self.formWidget.display()

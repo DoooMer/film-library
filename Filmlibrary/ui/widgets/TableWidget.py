@@ -1,9 +1,3 @@
-import os
-
-from PyQt5.QtCore import QAbstractTableModel
-from PyQt5.QtCore import QModelIndex
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QStackedWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QWidget
@@ -15,6 +9,7 @@ from Filmlibrary.ui.templates import Ui_MainView
 class TableWidget(QWidget, Ui_MainView):
     tableHeaders = ["ID", "Диск", "Название", "Год", "Жанр", "Режиссер", "В ролях"]
     selectedRow = None
+    selectedFilmId = None
 
     def __init__(self, app=None):
         super().__init__()
@@ -30,6 +25,7 @@ class TableWidget(QWidget, Ui_MainView):
         self.buttonEdit.hide()
         self.buttonDelete.hide()
         self.selectedRow = None
+        self.selectedFilmId = None
         self.list.clearSelection()
         self.loadValues()
         assert isinstance(self.parent(), QStackedWidget)
@@ -52,6 +48,11 @@ class TableWidget(QWidget, Ui_MainView):
 
     def toggleEditButtons(self, row):
         self.selectedRow = row
+
         self.buttonEdit.show()
         self.buttonDelete.show()
-        # print(self.selectedRow)
+
+        indexes = self.list.selectionModel().selectedIndexes()
+        model = self.list.selectionModel().model()
+        # grab ID from hidden first column
+        self.selectedFilmId = model.data(indexes[0])
