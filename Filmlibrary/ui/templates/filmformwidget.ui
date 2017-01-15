@@ -135,6 +135,12 @@
      </property>
      <item row="0" column="0">
       <widget class="QLabel" name="diskLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>Номер диска</string>
        </property>
@@ -142,6 +148,12 @@
      </item>
      <item row="0" column="1">
       <widget class="QSpinBox" name="diskInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="minimum">
         <number>1</number>
        </property>
@@ -152,16 +164,35 @@
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="titleLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>Название</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="titleInput"/>
+      <widget class="QLineEdit" name="titleInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="yearLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>Год выхода</string>
        </property>
@@ -174,6 +205,12 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
        </property>
        <property name="inputMask">
         <string>9999</string>
@@ -191,33 +228,72 @@
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="genreLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>Жанр</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="genreInput"/>
+      <widget class="QLineEdit" name="genreInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="directorLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>Режиссер</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="directorInput"/>
+      <widget class="QLineEdit" name="directorInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
+      </widget>
      </item>
      <item row="5" column="0">
       <widget class="QLabel" name="roleLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
        <property name="text">
         <string>В ролях</string>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QLineEdit" name="roleInput"/>
+      <widget class="QLineEdit" name="roleInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>37</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

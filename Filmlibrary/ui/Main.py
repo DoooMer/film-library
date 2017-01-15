@@ -5,6 +5,7 @@ from Filmlibrary import config
 from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_MainWindow
 from Filmlibrary.ui.widgets import OpenWidget, TableWidget, FormWidget
+from Filmlibrary.ui.widgets import SearchWidget
 
 
 class Main(QMainWindow, Ui_MainWindow):
@@ -15,6 +16,7 @@ class Main(QMainWindow, Ui_MainWindow):
     openWidget = None
     tableWidget = None
     formWidget = None
+    searchWidget = None
 
     def __init__(self, parent=None, app=None):
         super(Main, self).__init__(parent)
@@ -36,6 +38,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.openWidget = OpenWidget(app=self.app)
         self.tableWidget = TableWidget(app=self.app)
         self.formWidget = FormWidget(app=self.app)
+        self.searchWidget = SearchWidget(app=self.app)
 
         self.setup_central_widgets()
 
@@ -59,8 +62,12 @@ class Main(QMainWindow, Ui_MainWindow):
         self.tableWidget.buttonAdd.clicked.connect(self.create_film)
         self.tableWidget.buttonEdit.clicked.connect(self.edit_film)
         self.tableWidget.buttonDelete.clicked.connect(self.delete_film)
+        self.tableWidget.buttonFind.clicked.connect(self.search)
 
         self.centralWidget.addWidget(self.formWidget)
+
+        self.centralWidget.addWidget(self.searchWidget)
+        self.searchWidget.result.cellDoubleClicked.connect(self.edit_film_search)
 
         self.choose_central_widget()
 
@@ -105,6 +112,10 @@ class Main(QMainWindow, Ui_MainWindow):
         self.formWidget.load(self.tableWidget.selectedFilmId)
         self.formWidget.display()
 
+    def edit_film_search(self):
+        self.formWidget.load(self.searchWidget.selectedFilmId)
+        self.formWidget.display()
+
     def delete_film(self):
         confirm = QMessageBox.question(
             self,
@@ -123,3 +134,6 @@ class Main(QMainWindow, Ui_MainWindow):
         self.app.close()
         self.app.settings.remove("LastOpenedDatabaseFile")
         self.choose_central_widget()
+
+    def search(self):
+        self.searchWidget.display()
