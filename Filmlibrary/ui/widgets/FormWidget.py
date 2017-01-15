@@ -10,6 +10,7 @@ from Filmlibrary.ui.templates import Ui_FilmForm
 
 class FormWidget(QWidget, Ui_FilmForm):
     film = None
+    backWidget = None
 
     def __init__(self, app=None):
         super().__init__()
@@ -40,7 +41,10 @@ class FormWidget(QWidget, Ui_FilmForm):
         self.roleInput.clear()
 
     def go_back(self):
-        self.parent().parent().tableWidget.display()
+        self.parent().setCurrentWidget(self.backWidget)
+
+    def set_back_widget(self, widget):
+        self.backWidget = widget
 
     def save(self):
         if self.film is not None:

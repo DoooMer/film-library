@@ -110,10 +110,12 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def edit_film(self):
         self.formWidget.load(self.tableWidget.selectedFilmId)
+        self.formWidget.set_back_widget(self.tableWidget)
         self.formWidget.display()
 
     def edit_film_search(self):
         self.formWidget.load(self.searchWidget.selectedFilmId)
+        self.formWidget.set_back_widget(self.searchWidget)
         self.formWidget.display()
 
     def delete_film(self):

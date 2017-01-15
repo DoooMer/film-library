@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QWidget
+from peewee import Expression
 
 from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_SearchForm
@@ -25,9 +26,48 @@ class SearchWidget(QWidget, Ui_SearchForm):
         self.parent().setCurrentWidget(self)
 
     def search(self):
-        print(self.queryInput.text())
+        self.reset_selection()
         iterator = 0
-        films = Film.select().where(Film.title == self.queryInput.text())
+        query = self.queryInput.text()
+        condition = None
+
+        if self.checkboxDisk.isChecked():
+            if condition is None:
+                condition = (Film.disk_number == int(query))
+            else:
+                condition |= (Film.disk_number == query)
+
+        if self.checkboxTitle.isChecked():
+            if condition is None:
+                condition = Film.title.contains(query)
+            else:
+                condition = condition | Film.title.contains(query)
+
+        if self.checkboxYear.isChecked():
+            if condition is None:
+                condition = (Film.year == int(query))
+            else:
+                condition |= (Film.year == int(query))
+
+        if self.checkboxGenre.isChecked():
+            if condition is None:
+                condition = Film.genre.contains(query)
+            else:
+                condition = condition | Film.genre.contains(query)
+
+        if self.checkboxDirector.isChecked():
+            if condition is None:
+                condition = Film.director.contains(query)
+            else:
+                condition = condition | Film.director.contains(query)
+
+        if self.checkboxRole.isChecked():
+            if condition is None:
+                condition = Film.role.contains(query)
+            else:
+                condition = condition | Film.role.contains(query)
+
+        films = Film.select().where(condition)
         self.result.setRowCount(len(films))
 
         for film in films:
@@ -41,7 +81,9 @@ class SearchWidget(QWidget, Ui_SearchForm):
             iterator += 1
 
     def cancel(self):
+        self.reset_selection()
         self.queryInput.clear()
+        self.result.setRowCount(0)
         self.go_back()
 
     def go_back(self):
@@ -52,3 +94,7 @@ class SearchWidget(QWidget, Ui_SearchForm):
         model = self.result.selectionModel().model()
         # grab ID from hidden first column
         self.selectedFilmId = model.data(indexes[0])
+
+    def reset_selection(self):
+        self.selectedFilmId = None
+        self.result.clearSelection()

@@ -145,35 +145,35 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_5">
+      <widget class="QCheckBox" name="checkboxTitle">
        <property name="text">
         <string>Название</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_4">
+      <widget class="QCheckBox" name="checkboxYear">
        <property name="text">
         <string>Год выхода</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
+      <widget class="QCheckBox" name="checkboxGenre">
        <property name="text">
         <string>Жанр</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="checkboxDirector">
        <property name="text">
         <string>Режиссер</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="checkboxRole">
        <property name="text">
         <string>В ролях</string>
        </property>
