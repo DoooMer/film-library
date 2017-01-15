@@ -21,7 +21,7 @@ class TableWidget(QWidget, Ui_MainView):
         self.list.setHorizontalHeaderLabels(self.tableHeaders)
         self.list.cellClicked.connect(self.toggle_edit_buttons)
 
-    def _reset_selection(self):
+    def reset_selection(self):
         self.selectedRow = None
         self.selectedFilmId = None
         self.list.clearSelection()
@@ -29,13 +29,13 @@ class TableWidget(QWidget, Ui_MainView):
     def display(self):
         self.buttonEdit.hide()
         self.buttonDelete.hide()
-        self._reset_selection()
+        self.reset_selection()
         self.load_values()
         assert isinstance(self.parent(), QStackedWidget)
         self.parent().setCurrentWidget(self)
 
     def load_values(self):
-        self._reset_selection()
+        self.reset_selection()
         iterator = 0
         films = Film.select()
         self.list.setRowCount(len(films))

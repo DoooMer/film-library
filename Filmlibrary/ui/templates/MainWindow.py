@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Filmlibrary/ui/mainwindow.ui'
+# Form implementation generated from reading ui file 'Filmlibrary/ui/templates/mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.7.1
 #
@@ -20,8 +20,8 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(800, 600))
         MainWindow.setStatusTip("")
         self.centralWidget = QtWidgets.QWidget(MainWindow)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.centralWidget.sizePolicy().hasHeightForWidth())
         self.centralWidget.setSizePolicy(sizePolicy)
@@ -64,8 +64,11 @@ class Ui_MainWindow(object):
         self.actionOpen.setObjectName("actionOpen")
         self.actionNew = QtWidgets.QAction(MainWindow)
         self.actionNew.setObjectName("actionNew")
+        self.actionClose = QtWidgets.QAction(MainWindow)
+        self.actionClose.setObjectName("actionClose")
         self.menu.addAction(self.actionNew)
         self.menu.addAction(self.actionOpen)
+        self.menu.addAction(self.actionClose)
         self.menu.addSeparator()
         self.menu.addAction(self.actionExit)
         self.menu_2.addAction(self.actionUpdate)
@@ -103,4 +106,5 @@ class Ui_MainWindow(object):
         self.actionOpen.setShortcut(_translate("MainWindow", "Ctrl+O"))
         self.actionNew.setText(_translate("MainWindow", "Создать..."))
         self.actionNew.setShortcut(_translate("MainWindow", "Ctrl+N"))
+        self.actionClose.setText(_translate("MainWindow", "Закрыть"))
 

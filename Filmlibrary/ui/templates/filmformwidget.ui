@@ -6,198 +6,222 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
+    <width>800</width>
     <height>480</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>480</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>80</y>
-     <width>591</width>
-     <height>251</height>
-    </rect>
+  <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinAndMaxSize</enum>
    </property>
-   <layout class="QFormLayout" name="formLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
-    </property>
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::ExpandingFieldsGrow</enum>
-    </property>
-    <property name="rowWrapPolicy">
-     <enum>QFormLayout::WrapLongRows</enum>
-    </property>
-    <property name="labelAlignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-    <property name="formAlignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="horizontalSpacing">
-     <number>10</number>
-    </property>
-    <property name="verticalSpacing">
-     <number>15</number>
-    </property>
-    <property name="leftMargin">
-     <number>20</number>
-    </property>
-    <property name="rightMargin">
-     <number>20</number>
-    </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="diskLabel">
-      <property name="text">
-       <string>Номер диска</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QSpinBox" name="diskInput">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>9999</number>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="titleLabel">
-      <property name="text">
-       <string>Название</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="titleInput"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="yearLabel">
-      <property name="text">
-       <string>Год выхода</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="yearInput">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="inputMask">
-       <string>9999</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="cursorPosition">
-       <number>0</number>
-      </property>
-      <property name="clearButtonEnabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="genreLabel">
-      <property name="text">
-       <string>Жанр</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="genreInput"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="directorLabel">
-      <property name="text">
-       <string>Режиссер</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="directorInput"/>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="roleLabel">
-      <property name="text">
-       <string>В ролях</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="roleInput"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QFrame" name="frame">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>641</width>
-     <height>80</height>
-    </rect>
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
+   <property name="topMargin">
+    <number>0</number>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
+   <property name="rightMargin">
+    <number>0</number>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QPushButton" name="buttonSave">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>121</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Сохранить</string>
-    </property>
-    <property name="shortcut">
-     <string>Ctrl+S</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="buttonCancel">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>10</y>
-      <width>121</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Отмена</string>
-    </property>
-    <property name="shortcut">
-     <string>Esc</string>
-    </property>
-   </widget>
-  </widget>
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>640</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="buttonSave">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Сохранить</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+S</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="buttonCancel">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>10</y>
+        <width>121</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Отмена</string>
+      </property>
+      <property name="shortcut">
+       <string>Esc</string>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinimumSize</enum>
+     </property>
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::ExpandingFieldsGrow</enum>
+     </property>
+     <property name="rowWrapPolicy">
+      <enum>QFormLayout::WrapLongRows</enum>
+     </property>
+     <property name="labelAlignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="formAlignment">
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
+     </property>
+     <property name="horizontalSpacing">
+      <number>10</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>15</number>
+     </property>
+     <property name="leftMargin">
+      <number>20</number>
+     </property>
+     <property name="rightMargin">
+      <number>20</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="diskLabel">
+       <property name="text">
+        <string>Номер диска</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QSpinBox" name="diskInput">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>9999</number>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="titleLabel">
+       <property name="text">
+        <string>Название</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="titleInput"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="yearLabel">
+       <property name="text">
+        <string>Год выхода</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="yearInput">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="inputMask">
+        <string>9999</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="cursorPosition">
+        <number>0</number>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="genreLabel">
+       <property name="text">
+        <string>Жанр</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="genreInput"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="directorLabel">
+       <property name="text">
+        <string>Режиссер</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="directorInput"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="roleLabel">
+       <property name="text">
+        <string>В ролях</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="roleInput"/>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

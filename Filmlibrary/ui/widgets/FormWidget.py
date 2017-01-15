@@ -28,10 +28,10 @@ class FormWidget(QWidget, Ui_FilmForm):
         self.parent().setCurrentWidget(self)
 
     def cancel(self):
-        self._clear_inputs()
+        self.clear_inputs()
         self.go_back()
 
-    def _clear_inputs(self):
+    def clear_inputs(self):
         self.diskInput.setValue(1)
         self.titleInput.clear()
         self.yearInput.clear()
@@ -71,7 +71,7 @@ class FormWidget(QWidget, Ui_FilmForm):
             message.exec_()
         else:
             self.film = None
-            self._clear_inputs()
+            self.clear_inputs()
             self.go_back()
 
     def load(self, film_id):

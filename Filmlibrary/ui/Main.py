@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QDesktopWidget, QFileDialog, QMainWindow, QMessageBox, QStackedWidget
+from PyQt5.QtWidgets import QSizePolicy
 
 from Filmlibrary import config
 from Filmlibrary.models.Film import Film
@@ -10,24 +11,34 @@ class Main(QMainWindow, Ui_MainWindow):
     width = 800
     height = 550
     title = "Film library 4.1"
+    centralWidget = None
+    openWidget = None
+    tableWidget = None
+    formWidget = None
 
     def __init__(self, parent=None, app=None):
         super(Main, self).__init__(parent)
         self.app = app
         self.setupUi(self)
-        self.actionNew.triggered.connect(self.createFileDialog)
-        self.actionOpen.triggered.connect(self.openFileDialog)
+
+        self.actionNew.triggered.connect(self.create_file_dialog)
+        self.actionOpen.triggered.connect(self.open_file_dialog)
+        self.actionClose.triggered.connect(self.close_file)
         self.actionExit.triggered.connect(self.close)
+        self.actionCreate.triggered.connect(self.create_film)
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
         self.resize(self.width, self.height)
         self.center()
         self.setWindowTitle(self.title)
+
         self.openWidget = OpenWidget(app=self.app)
         self.tableWidget = TableWidget(app=self.app)
         self.formWidget = FormWidget(app=self.app)
-        self.setupCentralWidgets()
+
+        self.setup_central_widgets()
+
         self.show()
 
     def center(self):
@@ -36,26 +47,28 @@ class Main(QMainWindow, Ui_MainWindow):
         frame_geometry.moveCenter(center)
         self.move(frame_geometry.topLeft())
 
-    def setupCentralWidgets(self):
+    def setup_central_widgets(self):
         self.centralWidget = QStackedWidget()
         self.setCentralWidget(self.centralWidget)
 
         self.centralWidget.addWidget(self.openWidget)
-        self.openWidget.buttonCreate.clicked.connect(self.createFileDialog)
-        self.openWidget.buttonOpen.clicked.connect(self.openFileDialog)
+        self.openWidget.buttonCreate.clicked.connect(self.create_file_dialog)
+        self.openWidget.buttonOpen.clicked.connect(self.open_file_dialog)
 
         self.centralWidget.addWidget(self.tableWidget)
-        self.tableWidget.buttonAdd.clicked.connect(self.showCreate)
-        self.tableWidget.buttonEdit.clicked.connect(self.showEdit)
-        self.tableWidget.buttonDelete.clicked.connect(self.deleteFilm)
+        self.tableWidget.buttonAdd.clicked.connect(self.create_film)
+        self.tableWidget.buttonEdit.clicked.connect(self.edit_film)
+        self.tableWidget.buttonDelete.clicked.connect(self.delete_film)
 
         self.centralWidget.addWidget(self.formWidget)
 
-        self.chooseCentralWidget()
+        self.choose_central_widget()
 
-    def chooseCentralWidget(self):
+    def choose_central_widget(self):
         if self.app.isOpen:
             self.tableWidget.display()
+        else:
+            self.openWidget.display()
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, 'Message', "Are you sure to quit?", QMessageBox.Yes | QMessageBox.No,
@@ -67,26 +80,32 @@ class Main(QMainWindow, Ui_MainWindow):
         else:
             event.ignore()
 
-    def openFileDialog(self):
-        dbfile = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
-        self.app.dbFile = dbfile[0]
-        self.app.connect()
-        self.chooseCentralWidget()
+    def open_file_dialog(self):
+        db_file = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
 
-    def createFileDialog(self):
-        dbfile = QFileDialog.getSaveFileName(self, 'Create file', config.defaultDbFileName, 'DB files (*.db)')
-        self.app.dbFile = dbfile[0]
-        self.app.connect()
-        self.chooseCentralWidget()
+        if len(db_file[0]) > 0:
+            self.app.dbFile = db_file[0]
+            self.app.connect()
 
-    def showCreate(self):
+        self.choose_central_widget()
+
+    def create_file_dialog(self):
+        db_file = QFileDialog.getSaveFileName(self, 'Create file', config.defaultDbFileName, 'DB files (*.db)')
+
+        if len(db_file[0]) > 0:
+            self.app.dbFile = db_file[0]
+            self.app.connect()
+
+        self.choose_central_widget()
+
+    def create_film(self):
         self.formWidget.display()
 
-    def showEdit(self):
+    def edit_film(self):
         self.formWidget.load(self.tableWidget.selectedFilmId)
         self.formWidget.display()
 
-    def deleteFilm(self):
+    def delete_film(self):
         confirm = QMessageBox.question(
             self,
             "Delete film",
@@ -95,10 +114,12 @@ class Main(QMainWindow, Ui_MainWindow):
             QMessageBox.No
         )
 
-        if confirm == QMessageBox.Yes:
-            if self.tableWidget.selectedFilmId is not None:
-                film = Film.get(Film.id == self.tableWidget.selectedFilmId)
-                film.delete_instance()
-                self.tableWidget.load_values()
-        else:
-            pass
+        if confirm == QMessageBox.Yes and self.tableWidget.selectedFilmId is not None:
+            film = Film.get(Film.id == self.tableWidget.selectedFilmId)
+            film.delete_instance()
+            self.tableWidget.load_values()
+
+    def close_file(self):
+        self.app.close()
+        self.app.settings.remove("LastOpenedDatabaseFile")
+        self.choose_central_widget()
