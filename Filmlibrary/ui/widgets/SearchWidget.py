@@ -15,12 +15,40 @@ class SearchWidget(QWidget, Ui_SearchForm):
         self.setupUi(self)
         self.app = app
 
+        self.load_settings()
+
         self.result.hideColumn(0)
         self.result.setHorizontalHeaderLabels(self.tableHeaders)
         self.result.cellClicked.connect(self.select_film)
 
         self.buttonSearch.clicked.connect(self.search)
         self.buttonCancel.clicked.connect(self.cancel)
+
+        self.checkboxDisk.clicked.connect(self.remember_selection)
+        self.checkboxTitle.clicked.connect(self.remember_selection)
+        self.checkboxYear.clicked.connect(self.remember_selection)
+        self.checkboxGenre.clicked.connect(self.remember_selection)
+        self.checkboxDirector.clicked.connect(self.remember_selection)
+        self.checkboxRole.clicked.connect(self.remember_selection)
+
+    def load_settings(self):
+        disk_enabled = self.app.settings.value('Search/disk', False, type=bool)
+        self.checkboxDisk.setChecked(bool(disk_enabled))
+
+        title_enabled = self.app.settings.value('Search/title', False)
+        self.checkboxTitle.setChecked(bool(title_enabled))
+
+        year_enabled = self.app.settings.value('Search/year', False)
+        self.checkboxYear.setChecked(bool(year_enabled))
+
+        genre_enabled = self.app.settings.value('Search/genre', False)
+        self.checkboxGenre.setChecked(bool(genre_enabled))
+
+        director_enabled = self.app.settings.value('Search/director', False)
+        self.checkboxDirector.setChecked(bool(director_enabled))
+
+        role_enabled = self.app.settings.value('Search/role', False)
+        self.checkboxRole.setChecked(bool(role_enabled))
 
     def display(self):
         self.parent().setCurrentWidget(self)
@@ -31,7 +59,7 @@ class SearchWidget(QWidget, Ui_SearchForm):
         query = self.queryInput.text()
         condition = None
 
-        if self.checkboxDisk.isChecked():
+        if self.checkboxDisk.isChecked() and len(query) > 0:
             if condition is None:
                 condition = (Film.disk_number == int(query))
             else:
@@ -43,7 +71,7 @@ class SearchWidget(QWidget, Ui_SearchForm):
             else:
                 condition = condition | Film.title.contains(query)
 
-        if self.checkboxYear.isChecked():
+        if self.checkboxYear.isChecked() and len(query) > 0:
             if condition is None:
                 condition = (Film.year == int(query))
             else:
@@ -98,3 +126,11 @@ class SearchWidget(QWidget, Ui_SearchForm):
     def reset_selection(self):
         self.selectedFilmId = None
         self.result.clearSelection()
+
+    def remember_selection(self):
+        self.app.settings.setValue('Search/disk', self.checkboxDisk.isChecked())
+        self.app.settings.setValue('Search/title', self.checkboxTitle.isChecked())
+        self.app.settings.setValue('Search/year', self.checkboxYear.isChecked())
+        self.app.settings.setValue('Search/genre', self.checkboxGenre.isChecked())
+        self.app.settings.setValue('Search/director', self.checkboxDirector.isChecked())
+        self.app.settings.setValue('Search/role', self.checkboxRole.isChecked())

@@ -28,6 +28,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.actionClose.triggered.connect(self.close_file)
         self.actionExit.triggered.connect(self.close)
         self.actionCreate.triggered.connect(self.create_film)
+        self.actionSearch.triggered.connect(self.search)
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
