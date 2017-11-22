@@ -1,8 +1,10 @@
+import sys
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QApplication
 from peewee import SqliteDatabase
 
 from Filmlibrary import config
+from Filmlibrary import models
 from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.Main import Main
 
@@ -25,6 +27,11 @@ class Filmlibrary:
     def connect(self):
         self.close()
         config.db.init(self.dbFile)
+
+        if models.check_version():
+            # require do import
+            pass
+
         config.db.create_tables([Film], True)
         self.settings.setValue('LastOpenedDatabaseFile', self.dbFile)
         self.isOpen = True
