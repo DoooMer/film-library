@@ -107,6 +107,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.choose_central_widget()
 
     def create_film(self):
+        self.formWidget.set_back_widget(self.tableWidget)
         self.formWidget.display()
 
     def edit_film(self):
