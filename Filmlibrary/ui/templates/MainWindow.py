@@ -100,11 +100,12 @@ class Ui_MainWindow(object):
         self.actionDelete.setStatusTip(_translate("MainWindow", "Удалить выбранный фильм"))
         self.actionSearch.setText(_translate("MainWindow", "Поиск"))
         self.actionSearch.setStatusTip(_translate("MainWindow", "Найти фильм"))
+        self.actionSearch.setShortcut(_translate("MainWindow", "Ctrl+F"))
         self.actionUpdate.setText(_translate("MainWindow", "Обновить список"))
         self.actionUpdate.setStatusTip(_translate("MainWindow", "Обновить список фильмов"))
         self.actionOpen.setText(_translate("MainWindow", "Открыть..."))
         self.actionOpen.setShortcut(_translate("MainWindow", "Ctrl+O"))
         self.actionNew.setText(_translate("MainWindow", "Создать..."))
         self.actionNew.setShortcut(_translate("MainWindow", "Ctrl+N"))
-        self.actionClose.setText(_translate("MainWindow", "Закрыть"))
+        self.actionClose.setText(_translate("MainWindow", "&Закрыть"))
 
