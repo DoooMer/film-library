@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget
 
 from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_FilmForm
+from Filmlibrary.ui.widgets import TableWidget
 
 
 class FormWidget(QWidget, Ui_FilmForm):
@@ -66,6 +67,11 @@ class FormWidget(QWidget, Ui_FilmForm):
 
         try:
             self.film.save()
+
+            # вызывает событие обновления таблицы
+            if isinstance(self.backWidget, TableWidget):
+                self.backWidget.refreshList.emit()
+
         except ValueError:
             message = QMessageBox()
             message.setIcon(QMessageBox.Warning)

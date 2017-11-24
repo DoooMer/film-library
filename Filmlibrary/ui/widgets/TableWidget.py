@@ -1,3 +1,4 @@
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QStackedWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QWidget
@@ -10,6 +11,8 @@ class TableWidget(QWidget, Ui_MainView):
     tableHeaders = ["ID", "Диск", "Название", "Год", "Жанр", "Режиссер", "В ролях"]
     selectedRow = None
     selectedFilmId = None
+    # сигнал для обновления данных в таблице
+    refreshList = pyqtSignal()
 
     def __init__(self, app=None):
         super().__init__()
@@ -20,6 +23,7 @@ class TableWidget(QWidget, Ui_MainView):
         self.list.hideColumn(0)
         self.list.setHorizontalHeaderLabels(self.tableHeaders)
         self.list.cellClicked.connect(self.toggle_edit_buttons)
+        self.refreshList.connect(self.display)
 
     def reset_selection(self):
         self.selectedRow = None
