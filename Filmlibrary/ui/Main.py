@@ -80,7 +80,7 @@ class Main(QMainWindow, Ui_MainWindow):
             self.openWidget.display()
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Message', "Are you sure to quit?", QMessageBox.Yes | QMessageBox.No,
+        reply = QMessageBox.question(self, 'Выход', "Уверены что хотите выйти?", QMessageBox.Yes | QMessageBox.No,
                                      QMessageBox.No)
 
         if reply == QMessageBox.Yes:
@@ -90,7 +90,7 @@ class Main(QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def open_file_dialog(self):
-        db_file = QFileDialog.getOpenFileName(self, 'Open file', '', "DB files (*.db)")
+        db_file = QFileDialog.getOpenFileName(self, 'Открыть файл', '', "DB files (*.db)")
 
         if len(db_file[0]) > 0:
             self.app.dbFile = db_file[0]
@@ -99,7 +99,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.choose_central_widget()
 
     def create_file_dialog(self):
-        db_file = QFileDialog.getSaveFileName(self, 'Create file', config.defaultDbFileName, 'DB files (*.db)')
+        db_file = QFileDialog.getSaveFileName(self, 'Создать файл', config.defaultDbFileName, 'DB files (*.db)')
 
         if len(db_file[0]) > 0:
             self.app.dbFile = db_file[0]
@@ -124,8 +124,8 @@ class Main(QMainWindow, Ui_MainWindow):
     def delete_film(self):
         confirm = QMessageBox.question(
             self,
-            "Delete film",
-            "Are you sure to delete?",
+            "Удаление",
+            "Уверены что хотите удалить?",
             QMessageBox.Yes | QMessageBox.No,
             QMessageBox.No
         )
