@@ -72,10 +72,13 @@ class SearchWidget(QWidget, Ui_SearchForm):
                 condition = condition | Film.title.contains(query)
 
         if self.checkboxYear.isChecked() and len(query) > 0:
-            if condition is None:
-                condition = (Film.year == int(query))
-            else:
-                condition |= (Film.year == int(query))
+            try:
+                if condition is None:
+                    condition = (Film.year == int(query))
+                else:
+                    condition |= (Film.year == int(query))
+            except ValueError:
+                pass
 
         if self.checkboxGenre.isChecked():
             if condition is None:
