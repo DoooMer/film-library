@@ -29,6 +29,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.actionExit.triggered.connect(self.close)
         self.actionCreate.triggered.connect(self.create_film)
         self.actionSearch.triggered.connect(self.search)
+        self.actionUpdate.triggered.connect(self.update_table)
 
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
@@ -141,3 +142,7 @@ class Main(QMainWindow, Ui_MainWindow):
 
     def search(self):
         self.searchWidget.display()
+
+    # обновление таблицы
+    def update_table(self):
+        self.tableWidget.refreshList.emit()
