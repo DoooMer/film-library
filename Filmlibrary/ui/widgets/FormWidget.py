@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QWidget
 from Filmlibrary.models.Film import Film
 from Filmlibrary.ui.templates import Ui_FilmForm
 from Filmlibrary.ui.widgets import TableWidget
+from Filmlibrary.validators.FilmValidator import FilmValidator
 
 
 class FormWidget(QWidget, Ui_FilmForm):
@@ -65,24 +66,33 @@ class FormWidget(QWidget, Ui_FilmForm):
                 role=self.roleInput.text()
             )
 
-        try:
-            self.film.save()
+        # валидация
+        validator = FilmValidator(self.film)
+        validator.validate()
 
-            # вызывает событие обновления таблицы
-            if isinstance(self.backWidget, TableWidget):
-                self.backWidget.refreshList.emit()
+        if len(validator.errors) > 0:
+            # вывод ошибок
+            message = "Ошибка\n"
 
-        except ValueError:
-            message = QMessageBox()
-            message.setIcon(QMessageBox.Warning)
-            message.setText("Ошибка сохранения")
-            message.setWindowTitle("Ошибка")
-            message.setStandardButtons(QMessageBox.Ok)
-            message.exec_()
+            for field, error in validator.errors.items():
+                message += "\n" + error
+
+            self.show_error(message + "\n")
         else:
-            self.film = None
-            self.clear_inputs()
-            self.go_back()
+            # попытка сохранить в базе
+            try:
+                self.film.save()
+
+                # вызывает событие обновления таблицы
+                if isinstance(self.backWidget, TableWidget):
+                    self.backWidget.refreshList.emit()
+
+            except ValueError:
+                self.show_error()
+            else:
+                self.film = None
+                self.clear_inputs()
+                self.go_back()
 
     def load(self, film_id):
         self.film = Film.get(Film.id == film_id)
@@ -93,3 +103,12 @@ class FormWidget(QWidget, Ui_FilmForm):
         self.genreInput.setText(self.film.genre)
         self.directorInput.setText(self.film.director)
         self.roleInput.setText(self.film.role)
+
+    @staticmethod
+    def show_error(text=None):
+        message = QMessageBox()
+        message.setIcon(QMessageBox.Warning)
+        message.setText("Ошибка сохранения" if text is None else text)
+        message.setWindowTitle("Ошибка")
+        message.setStandardButtons(QMessageBox.Ok)
+        message.exec_()
